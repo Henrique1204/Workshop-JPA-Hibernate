@@ -1,13 +1,20 @@
 package com.paulo.projeto.entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "tb_user")
 public class User implements Serializable
 {
 	// Versão Serializable
@@ -20,6 +27,10 @@ public class User implements Serializable
 	private String email;
 	private String fone;
 	private String senha;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente")
+	private List<Order> pedidos = new ArrayList<>();
 
 	// Construtores
 	public User() {}
@@ -57,6 +68,10 @@ public class User implements Serializable
 	public String getSenha()
 	{
 		return this.senha;
+	}
+
+	public List<Order> getPedidos() {
+		return this.pedidos;
 	}
 
 	// Setters
