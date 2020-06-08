@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.paulo.projeto.entidades.Category;
 import com.paulo.projeto.entidades.Order;
+import com.paulo.projeto.entidades.Product;
 import com.paulo.projeto.entidades.User;
 import com.paulo.projeto.entidades.enums.OrderStatus;
 import com.paulo.projeto.repositories.CategoryRepository;
 import com.paulo.projeto.repositories.OrderRepository;
+import com.paulo.projeto.repositories.ProductRepository;
 import com.paulo.projeto.repositories.UserRepository;
 
 @Configuration
@@ -26,6 +28,8 @@ public class TestConfig implements CommandLineRunner
 	private OrderRepository orderRepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
+	@Autowired
+	private ProductRepository productRepository;
 
 	@Override
 	public void run(String... args) throws Exception
@@ -41,10 +45,18 @@ public class TestConfig implements CommandLineRunner
 
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 
-		Category cat1 = new Category(null, "Eletronicos");
-		Category cat2 = new Category(null, "Livross");
-		Category cat3 = new Category(null, "Computadores");
+		Category cat1 = new Category(null, "Eletronics");
+		Category cat2 = new Category(null, "Books");
+		Category cat3 = new Category(null, "Computers");
 
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+
+		Product p1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+		Product p2 = new Product(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+		Product p3 = new Product(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, ""); 
+
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 	}
 }

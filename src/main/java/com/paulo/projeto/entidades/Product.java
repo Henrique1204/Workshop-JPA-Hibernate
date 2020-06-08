@@ -12,8 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="tb_category")
-public class Category implements Serializable
+@Table(name="tb_product")
+public class Product implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
@@ -21,44 +21,69 @@ public class Category implements Serializable
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+	private String descricao;
+	private Double preco;
+	private String imgUrl;
 
 	@Transient
-	private Set<Product> products = new HashSet<>();
+	private Set<Category> categorires = new HashSet<>();
 
 	// Construtores
-	public Category() {}
+	public Product() {}
 
-	public Category(Long id, String nome)
+	public Product(Long id, String nome, String descricao, Double preco, String imgUrl)
 	{
 		this.setId(id);
 		this.setNome(nome);
+		this.setDescricao(descricao);
+		this.setPreco(preco);
+		this.setImgUrl(imgUrl);
 	}
 
 	// Getters
-	public Long getId()
-	{
+	public Long getId() {
 		return this.id;
 	}
 
-	public String getNome()
-	{
+	public String getNome() {
 		return this.nome;
 	}
 
-	public Set<Product> getProducts()
-	{
-		return this.products;
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public Double getPreco() {
+		return this.preco;
+	}
+
+	public String getImgUrl() {
+		return this.imgUrl;
+	}
+
+	public Set<Category> getCategorires() {
+		return categorires;
 	}
 
 	// Setters
-	public void setId(Long id)
-	{
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public void setNome(String nome)
-	{
+	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
 	// HashCode e Equals
@@ -68,7 +93,6 @@ public class Category implements Serializable
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
 
@@ -84,23 +108,14 @@ public class Category implements Serializable
 		if (getClass() != obj.getClass())
 			return false;
 
-		Category other = (Category) obj;
+		Product other = (Product) obj;
 
 		if (id == null)
 		{
 			if (other.id != null)
 				return false;
-
 		}
 		else if (!id.equals(other.id))
-			return false;
-
-		if (nome == null)
-		{
-			if (other.nome != null)
-				return false;
-		}
-		else if (!nome.equals(other.nome))
 			return false;
 
 		return true;
