@@ -146,4 +146,17 @@ public class Order implements Serializable {
 
 		return true;
 	}
+
+	// Métodos
+	public Double getTotal()
+	{
+		double soma = 0.0;
+
+		for (OrderItem item : items)
+		{
+			soma += item.getSubTotal();
+		}
+
+		return soma;
+	}
 }

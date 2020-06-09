@@ -111,5 +111,9 @@ public class OrderItem implements Serializable
 		return true;
 	}
 
-	
+	// Métodos
+	public Double getSubTotal()
+	{
+		return this.getQuantidade() * this.getPreco();
+	}
 }
